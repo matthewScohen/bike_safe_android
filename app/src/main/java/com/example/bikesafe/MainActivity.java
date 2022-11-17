@@ -16,6 +16,7 @@ import android.bluetooth.le.ScanCallback;
 import android.bluetooth.le.ScanFilter;
 import android.bluetooth.le.ScanResult;
 import android.bluetooth.le.ScanSettings;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
@@ -115,6 +116,11 @@ public class MainActivity<LeDeviceListAdapter> extends AppCompatActivity {
         RX_CHAR.setValue(message);
         RX_CHAR.setWriteType(BluetoothGattCharacteristic.WRITE_TYPE_DEFAULT);
         ble_gatt.writeCharacteristic(RX_CHAR);
+    }
+
+    public void toMap(View view){
+        Intent intent = new Intent(this, MapsActivity.class);
+        startActivity(intent);
     }
 
     public byte[] getMessage(){
