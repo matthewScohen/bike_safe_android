@@ -119,7 +119,7 @@ public class MainActivity<LeDeviceListAdapter> extends AppCompatActivity {
     }
 
     public void toMap(View view){
-        Intent intent = new Intent(this, MapsActivity.class);
+        Intent intent = new Intent(this, MapsActivityTest.class);
         startActivity(intent);
     }
 
