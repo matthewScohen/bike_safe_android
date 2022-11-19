@@ -4,13 +4,20 @@ import androidx.fragment.app.FragmentActivity;
 
 import android.os.Bundle;
 
+import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.example.bikesafe.databinding.ActivityMapsBinding;
+import com.google.android.gms.maps.model.Polyline;
+import com.google.android.gms.maps.model.PolylineOptions;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
@@ -43,9 +50,44 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
 
-        // Add a marker in Sydney and move the camera
-        LatLng sydney = new LatLng(-34, 151);
-        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+        // Add a marker at UF
+        LatLng uf = new LatLng(29.65056336935438, -82.34281887899938);
+        mMap.addMarker(new MarkerOptions().position(uf).title("Marker at UF"));
+
+        //creating camera bounds
+        LatLngBounds bounds = new LatLngBounds.Builder()
+                .include(new LatLng(29.6504963, -82.3423021))
+                .include(new LatLng(29.6448399, -82.3503985))
+                .build();
+        mMap.moveCamera(CameraUpdateFactory.newLatLngBounds(bounds, 50));
+
+        Polyline testLine =  mMap.addPolyline(new PolylineOptions()
+                .clickable(false)
+                .add(
+                        new LatLng(29.6504963, -82.3423061),
+//                        new LatLng(29.6497545, -82.3423021),
+
+                        new LatLng(29.6497545, -82.3423021),
+//                        new LatLng(29.6497543, -82.3447231),
+
+                        new LatLng(29.6497543, -82.3447231),
+//                        new LatLng(29.6487630, -82.3448427),
+
+                        new LatLng(29.6487630, -82.3448427),
+//                        new LatLng(29.6486438, -82.34972020000001),
+
+                        new LatLng(29.6486438, -82.34972020000001),
+//                        new LatLng(29.6448767, -82.3503985),
+
+                        new LatLng(29.6448767, -82.3503985),
+//                        new LatLng(29.6448399, -82.34859729999999),
+
+                        new LatLng(29.6448399, -82.34859729999999),
+                        new LatLng(29.6454873, -82.34859349999999)
+                        )
+        );
+        testLine.setTag("TEST");
+        testLine.setColor(0xff0082ff);
+        testLine.setWidth(15);
     }
 }

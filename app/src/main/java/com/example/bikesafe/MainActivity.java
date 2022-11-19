@@ -1,6 +1,7 @@
 package com.example.bikesafe;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.bluetooth.BluetoothAdapter;
@@ -24,9 +25,15 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.google.android.gms.common.api.Status;
+import com.google.android.libraries.places.api.model.Place;
+import com.google.android.libraries.places.widget.Autocomplete;
+import com.google.android.libraries.places.widget.AutocompleteActivity;
+import com.google.android.libraries.places.widget.model.AutocompleteActivityMode;
 import com.google.android.material.snackbar.Snackbar;
 
 import java.nio.charset.StandardCharsets;
+import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
 import java.util.logging.Logger;
@@ -35,7 +42,7 @@ public class MainActivity<LeDeviceListAdapter> extends AppCompatActivity {
 
     TextView textView;
     EditText phoneNum;
-
+    private static int AUTOCOMPLETE_REQUEST_CODE = 1;
 
     private BluetoothGatt ble_gatt = null;
     private final BluetoothGattCallback bluetoothGattCallback = new BluetoothGattCallback() {
@@ -119,9 +126,11 @@ public class MainActivity<LeDeviceListAdapter> extends AppCompatActivity {
     }
 
     public void toMap(View view){
-        Intent intent = new Intent(this, MapsActivityTest.class);
+        Intent intent = new Intent(this, MapsActivity.class);
         startActivity(intent);
     }
+
+
 
     public byte[] getMessage(){
         String number = phoneNum.getText().toString();
